@@ -23,4 +23,8 @@ public class ChristmasService {
     public VisitDate getVisitDate() {
         return domainRepository.getVisitDate();
     }
+
+    public OrderMenus getOrderMenus() {
+        return domainRepository.getOrderMenus();
+    }
 }
