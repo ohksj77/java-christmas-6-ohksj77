@@ -1,5 +1,6 @@
 package christmas.io;
 
+import christmas.domain.OrderMenus;
 import christmas.domain.VisitDate;
 
 import java.util.function.Supplier;
@@ -22,10 +23,18 @@ public class InputManager {
                 });
     }
 
-    private <T> T read(final Supplier<T> supplier) {
+    public OrderMenus readOrderMenus() {
+        return read(
+                () -> {
+                    final String input = inputView.readOrderMenus();
+                    return inputMapper.toOrderMenus(input);
+                });
+    }
+
+    private <T> T read(final Supplier<T> readDomain) {
         while (true) {
             try {
-                return supplier.get();
+                return readDomain.get();
             } catch (final IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }

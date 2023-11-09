@@ -23,10 +23,15 @@ public class ChristmasController {
     public void run() {
         outputView.printGreeting();
         createVisitDate();
+        createOrderMenus();
     }
 
     private void createVisitDate() {
         final VisitDate visitDate = inputManager.readVisitDate();
         christmasService.saveVisitDate(visitDate);
+    }
+
+    private void createOrderMenus() {
+        inputManager.readOrderMenus();
     }
 }
