@@ -1,7 +1,12 @@
 package christmas;
 
+import christmas.controller.ChristmasController;
+import christmas.factory.ComponentFactory;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        final ChristmasController christmasController =
+                ComponentFactory.INSTANCE.christmasController();
+        christmasController.run();
     }
 }
