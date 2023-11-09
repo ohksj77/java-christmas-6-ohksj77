@@ -20,4 +20,8 @@ public enum Giveaway {
                 .findAny()
                 .orElse(NONE);
     }
+
+    public String toString() {
+        return this.message;
+    }
 }

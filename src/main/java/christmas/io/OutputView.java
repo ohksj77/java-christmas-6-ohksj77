@@ -1,5 +1,6 @@
 package christmas.io;
 
+import christmas.constant.Giveaway;
 import christmas.constant.ProgressMessage;
 import christmas.domain.OrderMenus;
 import christmas.domain.VisitDate;
@@ -24,5 +25,9 @@ public class OutputView {
         System.out.println(ProgressMessage.ORDERED_MENUS);
         System.out.println(orderMenus);
         System.out.println(outputFormatter.formatBeforePriceSum(orderMenus));
+    }
+
+    public void printGiveaway(final Giveaway giveaway) {
+        System.out.println(giveaway);
     }
 }

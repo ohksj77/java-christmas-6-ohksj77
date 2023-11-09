@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.constant.Giveaway;
 import christmas.domain.OrderMenus;
 import christmas.domain.VisitDate;
 import christmas.io.InputManager;
@@ -25,8 +26,13 @@ public class ChristmasController {
         outputView.printGreeting();
         createVisitDate();
         createOrderMenus();
+        findResult();
+    }
+
+    private void findResult() {
         findBenefitPreview();
         findOrderMenus();
+        findGiveaway();
     }
 
     private void createVisitDate() {
@@ -47,5 +53,10 @@ public class ChristmasController {
     private void findOrderMenus() {
         final OrderMenus orderMenus = christmasService.getOrderMenus();
         outputView.printOrderMenus(orderMenus);
+    }
+
+    private void findGiveaway() {
+        final Giveaway giveaway = christmasService.calculateGiveaway();
+        outputView.printGiveaway(giveaway);
     }
 }
