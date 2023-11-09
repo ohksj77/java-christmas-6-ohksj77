@@ -35,4 +35,8 @@ public enum Menu {
                                 new IllegalArgumentException(
                                         ErrorMessage.INVALID_ORDER_MENUS.toString()));
     }
+
+    public MenuType toMenuType() {
+        return this.menuType;
+    }
 }
