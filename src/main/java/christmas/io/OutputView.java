@@ -23,5 +23,6 @@ public class OutputView {
     public void printOrderMenus(final OrderMenus orderMenus) {
         System.out.println(ProgressMessage.ORDERED_MENUS);
         System.out.println(orderMenus);
+        System.out.println(outputFormatter.formatBeforePriceSum(orderMenus));
     }
 }
