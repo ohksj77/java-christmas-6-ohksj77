@@ -1,6 +1,7 @@
 package christmas.io;
 
 import christmas.constant.ProgressMessage;
+import christmas.domain.OrderMenus;
 import christmas.domain.VisitDate;
 
 public class OutputView {
@@ -17,5 +18,10 @@ public class OutputView {
 
     public void printBenefitPreview(final VisitDate visitDate) {
         System.out.println(outputFormatter.formatBenefitPreview(visitDate));
+    }
+
+    public void printOrderMenus(final OrderMenus orderMenus) {
+        System.out.println(ProgressMessage.ORDERED_MENUS);
+        System.out.println(orderMenus);
     }
 }

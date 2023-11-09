@@ -4,10 +4,12 @@ import christmas.constant.ErrorMessage;
 import christmas.constant.MenuType;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OrderMenus {
 
     private static final int MAX_ORDER_MENUS_SIZE = 20;
+    private static final String NEW_LINE = "\n";
     private final List<OrderMenu> orderMenus;
 
     public OrderMenus(List<OrderMenu> orderMenus) {
@@ -34,5 +36,10 @@ public class OrderMenus {
 
     private boolean isNotDrink(final OrderMenu orderMenu) {
         return !orderMenu.toMenuType().equals(MenuType.DRINK);
+    }
+
+    @Override
+    public String toString() {
+        return orderMenus.stream().map(OrderMenu::toString).collect(Collectors.joining(NEW_LINE));
     }
 }

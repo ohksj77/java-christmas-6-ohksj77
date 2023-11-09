@@ -2,6 +2,7 @@ package christmas.domain;
 
 import christmas.constant.Menu;
 import christmas.constant.MenuType;
+import christmas.constant.ProgressMessage;
 
 public class OrderMenu {
 
@@ -15,5 +16,11 @@ public class OrderMenu {
 
     public MenuType toMenuType() {
         return menu.toMenuType();
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+                ProgressMessage.ORDERED_MENUS_DETAILS.toString(), menu.toName(), amount);
     }
 }
