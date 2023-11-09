@@ -5,6 +5,7 @@ import christmas.io.InputManager;
 import christmas.io.InputMapper;
 import christmas.io.InputValidator;
 import christmas.io.InputView;
+import christmas.io.OutputFormatter;
 import christmas.io.OutputView;
 import christmas.repository.DomainRepository;
 import christmas.service.ChristmasService;
@@ -17,6 +18,10 @@ public enum ComponentFactory {
     ComponentFactory() {
         this.christmasController =
                 new ChristmasController(outputView(), inputManager(), christmasService());
+    }
+
+    public ChristmasController christmasController() {
+        return this.christmasController;
     }
 
     private ChristmasService christmasService() {
@@ -44,10 +49,10 @@ public enum ComponentFactory {
     }
 
     private OutputView outputView() {
-        return new OutputView();
+        return new OutputView(outputFormatter());
     }
 
-    public ChristmasController christmasController() {
-        return this.christmasController;
+    private OutputFormatter outputFormatter() {
+        return new OutputFormatter();
     }
 }

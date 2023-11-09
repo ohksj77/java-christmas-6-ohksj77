@@ -19,4 +19,8 @@ public class ChristmasService {
     public void saveOrderMenus(final OrderMenus orderMenus) {
         domainRepository.saveOrderMenus(orderMenus);
     }
+
+    public VisitDate getVisitDate() {
+        return domainRepository.getVisitDate();
+    }
 }

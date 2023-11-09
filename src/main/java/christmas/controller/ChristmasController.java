@@ -25,6 +25,7 @@ public class ChristmasController {
         outputView.printGreeting();
         createVisitDate();
         createOrderMenus();
+        printBenefitPreview();
     }
 
     private void createVisitDate() {
@@ -35,5 +36,10 @@ public class ChristmasController {
     private void createOrderMenus() {
         final OrderMenus orderMenus = inputManager.readOrderMenus();
         christmasService.saveOrderMenus(orderMenus);
+    }
+
+    private void printBenefitPreview() {
+        final VisitDate visitDate = christmasService.getVisitDate();
+        outputView.printBenefitPreview(visitDate);
     }
 }
