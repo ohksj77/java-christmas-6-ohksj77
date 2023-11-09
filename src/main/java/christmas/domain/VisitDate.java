@@ -23,4 +23,8 @@ public class VisitDate {
             throw new IllegalArgumentException(ErrorMessage.INVALID_DATE.toString());
         }
     }
+
+    public LocalDate toLocalDate() {
+        return this.date;
+    }
 }
