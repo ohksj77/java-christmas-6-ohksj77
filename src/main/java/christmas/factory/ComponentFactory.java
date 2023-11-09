@@ -6,6 +6,8 @@ import christmas.io.InputMapper;
 import christmas.io.InputValidator;
 import christmas.io.InputView;
 import christmas.io.OutputView;
+import christmas.repository.DomainRepository;
+import christmas.service.ChristmasService;
 
 public enum ComponentFactory {
     INSTANCE;
@@ -13,7 +15,16 @@ public enum ComponentFactory {
     private final ChristmasController christmasController;
 
     ComponentFactory() {
-        this.christmasController = new ChristmasController(outputView(), inputManager());
+        this.christmasController =
+                new ChristmasController(outputView(), inputManager(), christmasService());
+    }
+
+    private ChristmasService christmasService() {
+        return new ChristmasService(domainRepository());
+    }
+
+    private DomainRepository domainRepository() {
+        return new DomainRepository();
     }
 
     private InputManager inputManager() {
