@@ -1,12 +1,13 @@
 package christmas.domain;
 
 import christmas.constant.ErrorMessage;
+import christmas.constant.Giveaway;
 import christmas.constant.MenuType;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class OrderMenus {
+public final class OrderMenus {
 
     private static final int MAX_ORDER_MENUS_SIZE = 20;
     private static final String NEW_LINE = "\n";
@@ -40,6 +41,10 @@ public class OrderMenus {
 
     public int beforePriceSum() {
         return orderMenus.stream().mapToInt(OrderMenu::beforePrice).sum();
+    }
+
+    public Giveaway checkGiveAwayStatus() {
+        return Giveaway.valueOfPriceSum(beforePriceSum());
     }
 
     @Override
