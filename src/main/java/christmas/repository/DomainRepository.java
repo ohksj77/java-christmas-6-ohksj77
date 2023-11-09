@@ -1,6 +1,7 @@
 package christmas.repository;
 
 import christmas.constant.ErrorMessage;
+import christmas.constant.Giveaway;
 import christmas.domain.OrderMenus;
 import christmas.domain.VisitDate;
 
@@ -11,6 +12,7 @@ public class DomainRepository {
 
     private VisitDate visitDate;
     private OrderMenus orderMenus;
+    private Giveaway giveaway;
 
     public void saveVisitDate(final VisitDate visitDate) {
         this.visitDate = visitDate;
@@ -26,6 +28,14 @@ public class DomainRepository {
 
     public OrderMenus getOrderMenus() {
         return get(() -> this.orderMenus);
+    }
+
+    public void saveGiveaway(final Giveaway giveaway) {
+        this.giveaway = giveaway;
+    }
+
+    public Giveaway getGiveaway() {
+        return get(() -> this.giveaway);
     }
 
     private <T> T get(final Supplier<T> supplier) {

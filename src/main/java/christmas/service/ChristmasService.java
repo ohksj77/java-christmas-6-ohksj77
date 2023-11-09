@@ -1,5 +1,6 @@
 package christmas.service;
 
+import christmas.constant.Giveaway;
 import christmas.domain.OrderMenus;
 import christmas.domain.VisitDate;
 import christmas.repository.DomainRepository;
@@ -26,5 +27,12 @@ public class ChristmasService {
 
     public OrderMenus getOrderMenus() {
         return domainRepository.getOrderMenus();
+    }
+
+    public Giveaway calculateGiveaway() {
+        final OrderMenus orderMenus = domainRepository.getOrderMenus();
+        final Giveaway giveaway = orderMenus.checkGiveAway();
+        domainRepository.saveGiveaway(giveaway);
+        return giveaway;
     }
 }

@@ -43,7 +43,7 @@ public final class OrderMenus {
         return orderMenus.stream().mapToInt(OrderMenu::beforePrice).sum();
     }
 
-    public Giveaway checkGiveAwayStatus() {
+    public Giveaway checkGiveAway() {
         return Giveaway.valueOfPriceSum(beforePriceSum());
     }
 
