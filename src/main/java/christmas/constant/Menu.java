@@ -43,4 +43,8 @@ public enum Menu {
     public String toName() {
         return this.name;
     }
+
+    public int toPrice() {
+        return this.price;
+    }
 }

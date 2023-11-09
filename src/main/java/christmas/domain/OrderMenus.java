@@ -38,6 +38,10 @@ public class OrderMenus {
         return !orderMenu.toMenuType().equals(MenuType.DRINK);
     }
 
+    public int beforePriceSum() {
+        return orderMenus.stream().mapToInt(OrderMenu::beforePrice).sum();
+    }
+
     @Override
     public String toString() {
         return orderMenus.stream().map(OrderMenu::toString).collect(Collectors.joining(NEW_LINE));

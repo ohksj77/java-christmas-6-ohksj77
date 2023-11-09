@@ -18,6 +18,10 @@ public class OrderMenu {
         return menu.toMenuType();
     }
 
+    public int beforePrice() {
+        return menu.toPrice() * amount;
+    }
+
     @Override
     public String toString() {
         return String.format(
