@@ -1,6 +1,7 @@
 package christmas.repository;
 
 import christmas.constant.ErrorMessage;
+import christmas.domain.OrderMenus;
 import christmas.domain.VisitDate;
 
 import java.util.Optional;
@@ -9,6 +10,7 @@ import java.util.function.Supplier;
 public class DomainRepository {
 
     private VisitDate visitDate;
+    private OrderMenus orderMenus;
 
     public void saveVisitDate(final VisitDate visitDate) {
         this.visitDate = visitDate;
@@ -16,6 +18,14 @@ public class DomainRepository {
 
     public VisitDate getVisitDate() {
         return get(() -> this.visitDate);
+    }
+
+    public void saveOrderMenus(final OrderMenus orderMenus) {
+        this.orderMenus = orderMenus;
+    }
+
+    public OrderMenus getOrderMenus() {
+        return get(() -> this.orderMenus);
     }
 
     private <T> T get(final Supplier<T> supplier) {

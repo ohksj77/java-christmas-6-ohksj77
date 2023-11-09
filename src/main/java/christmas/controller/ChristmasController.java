@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.domain.OrderMenus;
 import christmas.domain.VisitDate;
 import christmas.io.InputManager;
 import christmas.io.OutputView;
@@ -32,6 +33,7 @@ public class ChristmasController {
     }
 
     private void createOrderMenus() {
-        inputManager.readOrderMenus();
+        final OrderMenus orderMenus = inputManager.readOrderMenus();
+        christmasService.saveOrderMenus(orderMenus);
     }
 }
