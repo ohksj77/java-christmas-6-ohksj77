@@ -4,14 +4,14 @@ import christmas.constant.Menu;
 import christmas.constant.MenuType;
 import christmas.constant.ProgressMessage;
 
-public class OrderMenu {
+public final class OrderMenu {
 
     private final Menu menu;
-    private final Integer amount;
+    private final PurchaseNum purchaseNum;
 
-    public OrderMenu(final Menu menu, final Integer amount) {
+    public OrderMenu(final Menu menu, final Integer purchaseAmount) {
         this.menu = menu;
-        this.amount = amount;
+        this.purchaseNum = new PurchaseNum(purchaseAmount);
     }
 
     public MenuType toMenuType() {
@@ -19,12 +19,12 @@ public class OrderMenu {
     }
 
     public int beforePrice() {
-        return menu.toPrice() * amount;
+        return menu.toPrice() * purchaseNum.toValue();
     }
 
     @Override
     public String toString() {
         return String.format(
-                ProgressMessage.ORDERED_MENUS_DETAILS.toString(), menu.toName(), amount);
+                ProgressMessage.ORDERED_MENUS_DETAILS.toString(), menu.toName(), purchaseNum);
     }
 }
