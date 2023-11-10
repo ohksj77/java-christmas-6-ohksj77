@@ -15,16 +15,16 @@ public class InputView {
     }
 
     public String readVisitDate() {
-        System.out.println(ProgressMessage.VISIT_DAY_REQUEST);
-        return readInput(inputValidator::validateVisitDate);
+        return readInput(ProgressMessage.VISIT_DAY_REQUEST, inputValidator::validateVisitDate);
     }
 
     public String readOrderMenus() {
-        System.out.println(ProgressMessage.MENUS_REQUEST);
-        return readInput(inputValidator::validateOrderMenus);
+        return readInput(ProgressMessage.MENUS_REQUEST, inputValidator::validateOrderMenus);
     }
 
-    private String readInput(final Consumer<String> validation) {
+    private String readInput(
+            final ProgressMessage inputRequest, final Consumer<String> validation) {
+        System.out.println(inputRequest);
         final String input = Console.readLine();
         validation.accept(input);
         return input;
