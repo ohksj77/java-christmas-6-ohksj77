@@ -10,7 +10,7 @@ public class InputValidator {
 
     public void validateVisitDate(final String input) {
         if (isNotNumeric(input)) {
-            throw new IllegalArgumentException(ErrorMessage.NOT_NUMERIC.toString());
+            throw new IllegalArgumentException(ErrorMessage.INVALID_DATE.toString());
         }
     }
 
