@@ -13,6 +13,10 @@ public final class DiscountResults {
         this.discountDetails = List.copyOf(discountDetails);
     }
 
+    public DiscountResults() {
+        this.discountDetails = List.of();
+    }
+
     public DiscountDetail getDiscountDetailSum() {
         return discountDetails.stream()
                 .filter(discountDetail -> discountDetail.hasDiscountPolicy(DiscountPolicyType.ALL))

@@ -24,7 +24,7 @@ public class CompositeDiscountPolicy implements DiscountPolicy {
         this.mainDiscountCondition =
                 () -> orderMenus.toBeforePriceSumValue() >= MIN_PURCHASE_VALUE_FOR_DISCOUNT;
         this.discountPolicies = initializeDiscountPolicies(visitDate, orderMenus);
-        this.discountResults = organizeResults(giveaway);
+        this.discountResults = organizeResultsIfAvailable(giveaway);
     }
 
     private List<DiscountPolicy> initializeDiscountPolicies(
@@ -37,13 +37,22 @@ public class CompositeDiscountPolicy implements DiscountPolicy {
                 new SpecialDiscountPolicy(visitDate));
     }
 
+    private DiscountResults organizeResultsIfAvailable(final Giveaway giveaway) {
+        if (isUnavailableToDiscount()) {
+            return new DiscountResults();
+        }
+        return organizeResults(giveaway);
+    }
+
+    private boolean isUnavailableToDiscount() {
+        return !mainDiscountCondition.isProperToDiscount();
+    }
+
     private DiscountResults organizeResults(final Giveaway giveaway) {
         final List<DiscountDetail> results = calculateDiscounts();
-
         if (giveaway.exists()) {
             results.add(new DiscountDetail(DEFAULT_GIVEAWAY_DISCOUNT, DiscountPolicyType.GIVEAWAY));
         }
-
         results.add(new DiscountDetail(discountSum(results), DiscountPolicyType.ALL));
         return new DiscountResults(results);
     }
@@ -60,14 +69,10 @@ public class CompositeDiscountPolicy implements DiscountPolicy {
 
     @Override
     public DiscountDetail calculateDiscountAmount() {
-        if (isUnableToDiscount()) {
+        if (isUnavailableToDiscount()) {
             return new DiscountDetail(NO_DISCOUNT_DIFFERENCE, DiscountPolicyType.NO_DISCOUNT);
         }
         return discountResults.getDiscountDetailSum();
-    }
-
-    private boolean isUnableToDiscount() {
-        return !mainDiscountCondition.isProperToDiscount();
     }
 
     @Override
