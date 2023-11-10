@@ -4,6 +4,7 @@ import christmas.constant.Giveaway;
 import christmas.constant.ProgressMessage;
 import christmas.domain.DiscountDetail;
 import christmas.domain.DiscountResults;
+import christmas.domain.Money;
 import christmas.domain.OrderMenus;
 import christmas.domain.VisitDate;
 
@@ -41,6 +42,11 @@ public class OutputView {
 
     public void printDiscountSum(final DiscountDetail discountDetail) {
         System.out.println(ProgressMessage.DISCOUNT_SUM);
-        System.out.println(outputFormatter.formatMoney(discountDetail));
+        System.out.println(outputFormatter.formatDiscountDetail(discountDetail));
+    }
+
+    public void printExpectedAmount(final Money money) {
+        System.out.println(ProgressMessage.EXPECTED_AMOUNT);
+        System.out.println(outputFormatter.formatMoney(money));
     }
 }

@@ -42,7 +42,11 @@ public class OutputFormatter {
                 .collect(Collectors.joining(NEW_LINE));
     }
 
-    public String formatMoney(final DiscountDetail discountDetail) {
+    public String formatDiscountDetail(final DiscountDetail discountDetail) {
         return String.format(ProgressMessage.MONEY.toString(), discountDetail.toDifferenceValue());
+    }
+
+    public String formatMoney(final Money money) {
+        return String.format(ProgressMessage.MONEY.toString(), money.toValue());
     }
 }
