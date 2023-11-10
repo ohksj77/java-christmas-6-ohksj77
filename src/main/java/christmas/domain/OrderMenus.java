@@ -12,11 +12,11 @@ public final class OrderMenus {
 
     private static final int MAX_ORDER_MENUS_SIZE = 20;
     private static final String NEW_LINE = "\n";
-    private final List<OrderMenu> orderMenus;
+    private final List<OrderMenu> elements;
 
-    public OrderMenus(List<OrderMenu> orderMenus) {
-        validate(orderMenus);
-        this.orderMenus = List.copyOf(orderMenus);
+    public OrderMenus(List<OrderMenu> elements) {
+        validate(elements);
+        this.elements = List.copyOf(elements);
     }
 
     private void validate(final List<OrderMenu> orderMenus) {
@@ -41,7 +41,7 @@ public final class OrderMenus {
     }
 
     public Money beforePriceSum() {
-        final int sum = orderMenus.stream().mapToInt(OrderMenu::beforePrice).sum();
+        final int sum = elements.stream().mapToInt(OrderMenu::beforePrice).sum();
         return new Money(sum);
     }
 
@@ -58,7 +58,7 @@ public final class OrderMenus {
     }
 
     private boolean hasMenuType(final Predicate<OrderMenu> hasMenuType) {
-        return this.orderMenus.stream().anyMatch(hasMenuType);
+        return this.elements.stream().anyMatch(hasMenuType);
     }
 
     public int mainDishNum() {
@@ -66,7 +66,7 @@ public final class OrderMenus {
     }
 
     private int menuTypeNum(final Predicate<OrderMenu> isMenuType) {
-        return this.orderMenus.stream()
+        return this.elements.stream()
                 .filter(isMenuType)
                 .mapToInt(OrderMenu::toPurchaseNumValue)
                 .sum();
@@ -82,6 +82,6 @@ public final class OrderMenus {
 
     @Override
     public String toString() {
-        return orderMenus.stream().map(OrderMenu::toString).collect(Collectors.joining(NEW_LINE));
+        return elements.stream().map(OrderMenu::toString).collect(Collectors.joining(NEW_LINE));
     }
 }

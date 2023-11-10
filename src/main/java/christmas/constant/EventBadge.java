@@ -1,6 +1,5 @@
 package christmas.constant;
 
-
 import java.util.Arrays;
 import java.util.Comparator;
 
