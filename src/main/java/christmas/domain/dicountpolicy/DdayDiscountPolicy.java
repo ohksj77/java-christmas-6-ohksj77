@@ -1,6 +1,7 @@
 package christmas.domain.dicountpolicy;
 
 import christmas.constant.DiscountPolicyType;
+import christmas.constant.EventDate;
 import christmas.domain.DiscountDetail;
 import christmas.domain.Money;
 import christmas.domain.VisitDate;
@@ -9,9 +10,6 @@ import java.time.LocalDate;
 
 public class DdayDiscountPolicy implements DiscountPolicy {
 
-    private static final LocalDate BEFORE_START_DATE = LocalDate.of(2023, 11, 30);
-    private static final LocalDate AFTER_END_DATE = LocalDate.of(2023, 12, 26);
-    private static final LocalDate START_DATE = LocalDate.of(2023, 12, 1);
     private static final int INIT_MONEY = 1000;
     private static final int MONEY_UNIT_PER_DAY = 100;
     private final VisitDate visitDate;
@@ -22,7 +20,8 @@ public class DdayDiscountPolicy implements DiscountPolicy {
         this.discountCondition =
                 () -> {
                     final LocalDate date = this.visitDate.toLocalDate();
-                    return date.isAfter(BEFORE_START_DATE) && date.isBefore(AFTER_END_DATE);
+                    return date.isAfter(EventDate.BEFORE_D_DAY_START.toValue())
+                            && date.isBefore(EventDate.AFTER_D_DAY_END.toValue());
                 };
     }
 
@@ -41,7 +40,9 @@ public class DdayDiscountPolicy implements DiscountPolicy {
 
     private DiscountDetail calculateDiscount() {
         final int discountAmount =
-                INIT_MONEY + visitDate.compareDate(START_DATE) * MONEY_UNIT_PER_DAY;
+                INIT_MONEY
+                        + visitDate.compareDate(EventDate.START_OF_DECEMBER.toValue())
+                                * MONEY_UNIT_PER_DAY;
         return toDiscountDetail(discountAmount);
     }
 

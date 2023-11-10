@@ -1,6 +1,7 @@
 package christmas.domain.dicountpolicy;
 
 import christmas.constant.DiscountPolicyType;
+import christmas.constant.EventDate;
 import christmas.domain.DiscountDetail;
 import christmas.domain.Money;
 import christmas.domain.VisitDate;
@@ -10,7 +11,6 @@ import java.time.LocalDate;
 
 public class SpecialDiscountPolicy implements DiscountPolicy {
 
-    private static final LocalDate CHRISTMAS = LocalDate.of(2023, 12, 25);
     private static final int DISCOUNT_UNIT = 1000;
     private final DiscountCondition discountCondition;
 
@@ -18,7 +18,8 @@ public class SpecialDiscountPolicy implements DiscountPolicy {
         this.discountCondition =
                 () -> {
                     final LocalDate date = visitDate.toLocalDate();
-                    return date.getDayOfWeek() == DayOfWeek.SUNDAY || date.equals(CHRISTMAS);
+                    return date.getDayOfWeek() == DayOfWeek.SUNDAY
+                            || date.equals(EventDate.CHRISTMAS.toValue());
                 };
     }
 
