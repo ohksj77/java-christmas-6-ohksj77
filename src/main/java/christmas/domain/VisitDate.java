@@ -38,6 +38,10 @@ public final class VisitDate {
         return !isWeekend();
     }
 
+    public int compareDateReversed(final LocalDate date) {
+        return date.compareTo(this.date);
+    }
+
     public int compareDate(final LocalDate date) {
         return this.date.compareTo(date);
     }

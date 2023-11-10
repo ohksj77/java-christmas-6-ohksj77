@@ -19,4 +19,8 @@ public final class DiscountDetail {
     public DiscountPolicyType toDiscountPolicyType() {
         return this.discountPolicyType;
     }
+
+    public boolean hasNoValue() {
+        return difference.hasNoValue();
+    }
 }

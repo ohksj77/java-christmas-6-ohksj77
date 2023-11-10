@@ -4,5 +4,13 @@ public enum MenuType {
     APPETIZER,
     MAIN_DISH,
     DESSERT,
-    DRINK
+    DRINK;
+
+    public boolean isDessert() {
+        return this == DESSERT;
+    }
+
+    public boolean isMainDish() {
+        return this == MAIN_DISH;
+    }
 }
