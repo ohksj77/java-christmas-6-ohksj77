@@ -1,6 +1,7 @@
 package christmas.controller;
 
 import christmas.constant.Giveaway;
+import christmas.domain.DiscountDetail;
 import christmas.domain.DiscountResults;
 import christmas.domain.OrderMenus;
 import christmas.domain.VisitDate;
@@ -35,6 +36,7 @@ public class ChristmasController {
         findOrderMenus();
         findGiveaway();
         findBenefits();
+        findDiscountSum();
     }
 
     private void createVisitDate() {
@@ -65,5 +67,10 @@ public class ChristmasController {
     private void findBenefits() {
         final DiscountResults discountResults = christmasService.calculateBenefits();
         outputView.printDiscountResults(discountResults);
+    }
+
+    private void findDiscountSum() {
+        final DiscountDetail discountDetail = christmasService.calculateDiscountSum();
+        outputView.printDiscountSum(discountDetail);
     }
 }

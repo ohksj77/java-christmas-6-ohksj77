@@ -1,10 +1,12 @@
 package christmas.service;
 
 import christmas.constant.Giveaway;
+import christmas.domain.DiscountDetail;
 import christmas.domain.DiscountResults;
 import christmas.domain.OrderMenus;
 import christmas.domain.VisitDate;
 import christmas.domain.dicountpolicy.CompositeDiscountPolicy;
+import christmas.domain.dicountpolicy.DiscountPolicy;
 import christmas.repository.DomainRepository;
 
 public class ChristmasService {
@@ -48,5 +50,10 @@ public class ChristmasService {
         domainRepository.save(discountPolicy);
 
         return discountPolicy.toDiscountResults();
+    }
+
+    public DiscountDetail calculateDiscountSum() {
+        final DiscountPolicy discountPolicy = domainRepository.getDiscountPolicy();
+        return discountPolicy.calculateDiscountAmount();
     }
 }
