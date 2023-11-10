@@ -1,29 +1,34 @@
 package christmas.domain;
 
 import christmas.constant.DiscountPolicyType;
+import christmas.constant.ErrorMessage;
 
-import java.util.EnumMap;
-import java.util.Map;
+import java.util.List;
 
 public class DiscountResults {
 
-    private final Map<DiscountPolicyType, DiscountDetail> discountDetails;
+    private final List<DiscountDetail> discountDetails;
 
-    public DiscountResults(final Map<DiscountPolicyType, DiscountDetail> discountDetails) {
-        this.discountDetails = new EnumMap<>(DiscountPolicyType.class);
-        this.discountDetails.putAll(discountDetails);
+    public DiscountResults(final List<DiscountDetail> discountDetails) {
+        this.discountDetails = List.copyOf(discountDetails);
     }
 
     public DiscountDetail getDiscountDetailSum() {
-        return discountDetails.get(DiscountPolicyType.ALL);
+        return discountDetails.stream()
+                .filter(discountDetail -> discountDetail.hasDiscountPolicy(DiscountPolicyType.ALL))
+                .findFirst()
+                .orElseThrow(
+                        () ->
+                                new IllegalStateException(
+                                        ErrorMessage.INVALID_DISCOUNT_RESULTS.toString()));
     }
 
     public boolean hasNoDiscount() {
-        final DiscountDetail discountDetail = discountDetails.get(DiscountPolicyType.ALL);
+        final DiscountDetail discountDetail = getDiscountDetailSum();
         return discountDetail.hasNoValue();
     }
 
-    public Map<DiscountPolicyType, DiscountDetail> toDiscountDetails() {
-        return Map.copyOf(discountDetails);
+    public List<DiscountDetail> toDiscountDetails() {
+        return List.copyOf(discountDetails);
     }
 }

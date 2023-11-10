@@ -41,9 +41,10 @@ public class ChristmasService {
     public DiscountResults calculateBenefits() {
         final OrderMenus orderMenus = domainRepository.getOrderMenus();
         final VisitDate visitDate = domainRepository.getVisitDate();
+        final Giveaway giveaway = domainRepository.getGiveaway();
 
         final CompositeDiscountPolicy discountPolicy =
-                new CompositeDiscountPolicy(visitDate, orderMenus);
+                new CompositeDiscountPolicy(visitDate, orderMenus, giveaway);
         domainRepository.save(discountPolicy);
 
         return discountPolicy.toDiscountResults();
