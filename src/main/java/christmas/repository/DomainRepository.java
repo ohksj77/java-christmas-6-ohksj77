@@ -4,6 +4,7 @@ import christmas.constant.ErrorMessage;
 import christmas.constant.Giveaway;
 import christmas.domain.OrderMenus;
 import christmas.domain.VisitDate;
+import christmas.domain.dicountpolicy.DiscountPolicy;
 
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -13,6 +14,7 @@ public class DomainRepository {
     private VisitDate visitDate;
     private OrderMenus orderMenus;
     private Giveaway giveaway;
+    private DiscountPolicy discountPolicy;
 
     public void saveVisitDate(final VisitDate visitDate) {
         this.visitDate = visitDate;
@@ -36,6 +38,14 @@ public class DomainRepository {
 
     public Giveaway getGiveaway() {
         return get(() -> this.giveaway);
+    }
+
+    public void save(final DiscountPolicy discountPolicy) {
+        this.discountPolicy = discountPolicy;
+    }
+
+    public DiscountPolicy getDiscountPolicy() {
+        return get(() -> this.discountPolicy);
     }
 
     private <T> T get(final Supplier<T> supplier) {

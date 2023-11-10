@@ -1,8 +1,10 @@
 package christmas.service;
 
 import christmas.constant.Giveaway;
+import christmas.domain.DiscountResults;
 import christmas.domain.OrderMenus;
 import christmas.domain.VisitDate;
+import christmas.domain.dicountpolicy.CompositeDiscountPolicy;
 import christmas.repository.DomainRepository;
 
 public class ChristmasService {
@@ -34,5 +36,16 @@ public class ChristmasService {
         final Giveaway giveaway = orderMenus.checkGiveAway();
         domainRepository.saveGiveaway(giveaway);
         return giveaway;
+    }
+
+    public DiscountResults calculateBenefits() {
+        final OrderMenus orderMenus = domainRepository.getOrderMenus();
+        final VisitDate visitDate = domainRepository.getVisitDate();
+
+        final CompositeDiscountPolicy discountPolicy =
+                new CompositeDiscountPolicy(visitDate, orderMenus);
+        domainRepository.save(discountPolicy);
+
+        return discountPolicy.toDiscountResults();
     }
 }
