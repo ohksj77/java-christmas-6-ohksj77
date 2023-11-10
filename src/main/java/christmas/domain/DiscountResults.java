@@ -28,8 +28,7 @@ public final class DiscountResults {
     }
 
     public boolean hasNoDiscount() {
-        final DiscountDetail discountDetail = getDiscountDetailSum();
-        return discountDetail.hasNoValue();
+        return discountDetails.isEmpty() || getDiscountDetailSum().hasNoValue();
     }
 
     public List<DiscountDetail> toDiscountDetails() {
