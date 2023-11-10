@@ -7,35 +7,35 @@ import christmas.domain.VisitDate;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.function.Predicate;
 
 public class SpecialDiscountPolicy implements DiscountPolicy {
 
     private static final LocalDate CHRISTMAS = LocalDate.of(2023, 12, 25);
     private static final int DISCOUNT_UNIT = 1000;
     private final DiscountCondition discountCondition;
-    private final Predicate<LocalDate> isSpecialDate;
 
     public SpecialDiscountPolicy(final VisitDate visitDate) {
-        this.isSpecialDate =
-                date -> date.getDayOfWeek().equals(DayOfWeek.SUNDAY) || date.equals(CHRISTMAS);
-        this.discountCondition = () -> isSpecialDate.test(visitDate.toLocalDate());
+        this.discountCondition =
+                () -> {
+                    final LocalDate date = visitDate.toLocalDate();
+                    return date.getDayOfWeek() == DayOfWeek.SUNDAY || date.equals(CHRISTMAS);
+                };
     }
 
     @Override
     public DiscountDetail calculateDiscountAmount() {
         if (discountCondition.isProperToDiscount()) {
-            return calculateDiscount();
+            return calculateDiscount(DISCOUNT_UNIT);
         }
-        return calculateDiscount();
+        return calculateDiscount(NO_DISCOUNT_DIFFERENCE);
     }
 
     @Override
     public Money discount(final Money money) {
-        return money.discount(calculateDiscount());
+        return money.discount(calculateDiscountAmount());
     }
 
-    private DiscountDetail calculateDiscount() {
-        return new DiscountDetail(DISCOUNT_UNIT, DiscountPolicyType.SPECIAL);
+    private DiscountDetail calculateDiscount(final int discountAmount) {
+        return new DiscountDetail(discountAmount, DiscountPolicyType.SPECIAL);
     }
 }

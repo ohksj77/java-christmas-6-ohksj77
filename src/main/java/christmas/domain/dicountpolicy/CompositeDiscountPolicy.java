@@ -40,12 +40,11 @@ public class CompositeDiscountPolicy implements DiscountPolicy {
     private DiscountResults organizeResults(final Giveaway giveaway) {
         final List<DiscountDetail> results = calculateDiscounts();
 
-        results.add(new DiscountDetail(discountSum(results), DiscountPolicyType.ALL));
-
-        if (giveaway.isPresent()) {
+        if (giveaway.exists()) {
             results.add(new DiscountDetail(DEFAULT_GIVEAWAY_DISCOUNT, DiscountPolicyType.GIVEAWAY));
         }
 
+        results.add(new DiscountDetail(discountSum(results), DiscountPolicyType.ALL));
         return new DiscountResults(results);
     }
 
