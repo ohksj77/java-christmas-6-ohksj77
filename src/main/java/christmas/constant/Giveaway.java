@@ -1,6 +1,9 @@
 package christmas.constant;
 
+import christmas.domain.Money;
+
 import java.util.Arrays;
+import java.util.Comparator;
 
 public enum Giveaway {
     PRESENT("샴페인 1개", 120_000),
@@ -14,10 +17,10 @@ public enum Giveaway {
         this.amount = amount;
     }
 
-    public static Giveaway valueOfPriceSum(final int priceSum) {
+    public static Giveaway valueOfPriceSum(final Money money) {
         return Arrays.stream(values())
-                .filter(value -> value.amount < priceSum)
-                .findAny()
+                .filter(value -> value.amount < money.toValue())
+                .max(Comparator.comparingInt(before -> before.amount))
                 .orElse(NONE);
     }
 

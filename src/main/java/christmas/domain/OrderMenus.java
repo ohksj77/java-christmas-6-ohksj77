@@ -5,11 +5,13 @@ import christmas.constant.Giveaway;
 import christmas.constant.MenuType;
 
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public final class OrderMenus {
 
     private static final int MAX_ORDER_MENUS_SIZE = 20;
+    private static final int MIN_PURCHASE_VALUE_FOR_DISCOUNT = 10000;
     private static final String NEW_LINE = "\n";
     private final List<OrderMenu> orderMenus;
 
@@ -39,12 +41,42 @@ public final class OrderMenus {
         return !orderMenu.toMenuType().equals(MenuType.DRINK);
     }
 
-    public int beforePriceSum() {
-        return orderMenus.stream().mapToInt(OrderMenu::beforePrice).sum();
+    public Money beforePriceSum() {
+        final int sum = orderMenus.stream().mapToInt(OrderMenu::beforePrice).sum();
+        return new Money(sum);
     }
 
     public Giveaway checkGiveAway() {
         return Giveaway.valueOfPriceSum(beforePriceSum());
+    }
+
+    public boolean hasDessert() {
+        return hasMenuType(OrderMenu::isDessert);
+    }
+
+    public int dessertNum() {
+        return menuTypeNum(OrderMenu::isDessert);
+    }
+
+    private boolean hasMenuType(final Predicate<OrderMenu> hasMenuType) {
+        return this.orderMenus.stream().anyMatch(hasMenuType);
+    }
+
+    public int mainDishNum() {
+        return menuTypeNum(OrderMenu::isMainDish);
+    }
+
+    private int menuTypeNum(final Predicate<OrderMenu> isMenuType) {
+        Long count = this.orderMenus.stream().filter(isMenuType).count();
+        return count.intValue();
+    }
+
+    public boolean hasMainDish() {
+        return hasMenuType(OrderMenu::isMainDish);
+    }
+
+    public boolean isDiscountAvailable() {
+        return beforePriceSum().toValue() < MIN_PURCHASE_VALUE_FOR_DISCOUNT;
     }
 
     @Override
