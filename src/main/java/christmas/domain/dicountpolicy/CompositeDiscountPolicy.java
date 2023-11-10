@@ -14,19 +14,17 @@ import java.util.stream.Collectors;
 public class CompositeDiscountPolicy implements DiscountPolicy {
 
     private static final int DEFAULT_GIVEAWAY_DISCOUNT = 25000;
+    private static final int MIN_PURCHASE_VALUE_FOR_DISCOUNT = 10000;
     private final DiscountCondition mainDiscountCondition;
     private final List<DiscountPolicy> discountPolicies;
     private final DiscountResults discountResults;
 
     public CompositeDiscountPolicy(
             final VisitDate visitDate, final OrderMenus orderMenus, final Giveaway giveaway) {
-        this.mainDiscountCondition = orderMenus::isDiscountAvailable;
+        this.mainDiscountCondition =
+                () -> orderMenus.toBeforePriceSumValue() >= MIN_PURCHASE_VALUE_FOR_DISCOUNT;
         this.discountPolicies = initializeDiscountPolicies(visitDate, orderMenus);
         this.discountResults = organizeResults(giveaway);
-    }
-
-    private boolean isUnableToDiscount() {
-        return !mainDiscountCondition.isProperToDiscount();
     }
 
     private List<DiscountPolicy> initializeDiscountPolicies(
@@ -67,6 +65,10 @@ public class CompositeDiscountPolicy implements DiscountPolicy {
             return new DiscountDetail(NO_DISCOUNT_DIFFERENCE, DiscountPolicyType.NO_DISCOUNT);
         }
         return discountResults.getDiscountDetailSum();
+    }
+
+    private boolean isUnableToDiscount() {
+        return !mainDiscountCondition.isProperToDiscount();
     }
 
     @Override

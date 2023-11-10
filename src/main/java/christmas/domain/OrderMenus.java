@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 public final class OrderMenus {
 
     private static final int MAX_ORDER_MENUS_SIZE = 20;
-    private static final int MIN_PURCHASE_VALUE_FOR_DISCOUNT = 10000;
     private static final String NEW_LINE = "\n";
     private final List<OrderMenu> orderMenus;
 
@@ -75,8 +74,8 @@ public final class OrderMenus {
         return hasMenuType(OrderMenu::isMainDish);
     }
 
-    public boolean isDiscountAvailable() {
-        return beforePriceSum().toValue() < MIN_PURCHASE_VALUE_FOR_DISCOUNT;
+    public int toBeforePriceSumValue() {
+        return beforePriceSum().toValue();
     }
 
     @Override
