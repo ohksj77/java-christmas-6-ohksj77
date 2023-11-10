@@ -5,7 +5,7 @@ import christmas.constant.ErrorMessage;
 
 import java.util.List;
 
-public class DiscountResults {
+public final class DiscountResults {
 
     private final List<DiscountDetail> discountDetails;
 

@@ -12,12 +12,10 @@ public final class VisitDate {
     private static final int CURRENT_YEAR = 2023;
     private static final int CURRENT_MONTH = 12;
     private final LocalDate date;
-    private final DayOfWeek dayOfWeek;
 
     public VisitDate(final int date) {
         validate(date);
         this.date = LocalDate.of(CURRENT_YEAR, CURRENT_MONTH, date);
-        this.dayOfWeek = this.date.getDayOfWeek();
     }
 
     private void validate(final int date) {
@@ -31,6 +29,7 @@ public final class VisitDate {
     }
 
     public boolean isWeekend() {
+        final DayOfWeek dayOfWeek = date.getDayOfWeek();
         return dayOfWeek == DayOfWeek.FRIDAY || dayOfWeek == DayOfWeek.SATURDAY;
     }
 
