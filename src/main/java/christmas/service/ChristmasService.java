@@ -3,6 +3,7 @@ package christmas.service;
 import christmas.constant.Giveaway;
 import christmas.domain.DiscountDetail;
 import christmas.domain.DiscountResults;
+import christmas.domain.Money;
 import christmas.domain.OrderMenus;
 import christmas.domain.VisitDate;
 import christmas.domain.dicountpolicy.CompositeDiscountPolicy;
@@ -55,5 +56,12 @@ public class ChristmasService {
     public DiscountDetail calculateDiscountSum() {
         final DiscountPolicy discountPolicy = domainRepository.getDiscountPolicy();
         return discountPolicy.calculateDiscountAmount();
+    }
+
+    public Money checkExpectedAmount() {
+        final DiscountPolicy discountPolicy = domainRepository.getDiscountPolicy();
+        final OrderMenus orderMenus = domainRepository.getOrderMenus();
+
+        return discountPolicy.discount(orderMenus.beforePriceSum());
     }
 }

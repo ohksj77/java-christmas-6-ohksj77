@@ -3,6 +3,7 @@ package christmas.controller;
 import christmas.constant.Giveaway;
 import christmas.domain.DiscountDetail;
 import christmas.domain.DiscountResults;
+import christmas.domain.Money;
 import christmas.domain.OrderMenus;
 import christmas.domain.VisitDate;
 import christmas.io.InputManager;
@@ -37,6 +38,7 @@ public class ChristmasController {
         findGiveaway();
         findBenefits();
         findDiscountSum();
+        findExpectedAmount();
     }
 
     private void createVisitDate() {
@@ -72,5 +74,10 @@ public class ChristmasController {
     private void findDiscountSum() {
         final DiscountDetail discountDetail = christmasService.calculateDiscountSum();
         outputView.printDiscountSum(discountDetail);
+    }
+
+    private void findExpectedAmount() {
+        final Money money = christmasService.checkExpectedAmount();
+        outputView.printExpectedAmount(money);
     }
 }
