@@ -2,6 +2,7 @@ package christmas.io;
 
 import christmas.constant.Giveaway;
 import christmas.constant.ProgressMessage;
+import christmas.domain.DiscountResults;
 import christmas.domain.OrderMenus;
 import christmas.domain.VisitDate;
 
@@ -28,6 +29,12 @@ public class OutputView {
     }
 
     public void printGiveaway(final Giveaway giveaway) {
+        System.out.println(ProgressMessage.GIVEAWAY);
         System.out.println(giveaway);
+    }
+
+    public void printDiscountResults(final DiscountResults discountResults) {
+        System.out.println(ProgressMessage.BENEFIT_LOG);
+        System.out.println(outputFormatter.formatDiscountResults(discountResults));
     }
 }
