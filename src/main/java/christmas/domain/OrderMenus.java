@@ -66,8 +66,10 @@ public final class OrderMenus {
     }
 
     private int menuTypeNum(final Predicate<OrderMenu> isMenuType) {
-        Long count = this.orderMenus.stream().filter(isMenuType).count();
-        return count.intValue();
+        return this.orderMenus.stream()
+                .filter(isMenuType)
+                .mapToInt(OrderMenu::toPurchaseNumValue)
+                .sum();
     }
 
     public boolean hasMainDish() {

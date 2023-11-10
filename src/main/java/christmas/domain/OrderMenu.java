@@ -42,4 +42,8 @@ public final class OrderMenu {
         final MenuType menuType = menu.toMenuType();
         return isMenuType.test(menuType);
     }
+
+    public int toPurchaseNumValue() {
+        return this.purchaseNum.toValue();
+    }
 }

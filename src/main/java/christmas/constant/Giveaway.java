@@ -29,7 +29,7 @@ public enum Giveaway {
         return this.message;
     }
 
-    public boolean isPresent() {
+    public boolean exists() {
         return this == PRESENT;
     }
 }
