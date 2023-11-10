@@ -4,6 +4,8 @@ import christmas.constant.Menu;
 import christmas.constant.MenuType;
 import christmas.constant.ProgressMessage;
 
+import java.util.function.Predicate;
+
 public final class OrderMenu {
 
     private final Menu menu;
@@ -26,5 +28,18 @@ public final class OrderMenu {
     public String toString() {
         return String.format(
                 ProgressMessage.ORDERED_MENUS_DETAILS.toString(), menu.toName(), purchaseNum);
+    }
+
+    public boolean isDessert() {
+        return isMenuType(MenuType::isDessert);
+    }
+
+    public boolean isMainDish() {
+        return isMenuType(MenuType::isMainDish);
+    }
+
+    private boolean isMenuType(final Predicate<MenuType> isMenuType) {
+        final MenuType menuType = menu.toMenuType();
+        return isMenuType.test(menuType);
     }
 }

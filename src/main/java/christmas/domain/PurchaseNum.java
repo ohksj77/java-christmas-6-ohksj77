@@ -13,6 +13,6 @@ public final class PurchaseNum {
     }
 
     public String toString() {
-        return String.valueOf(value);
+        return Integer.toString(value);
     }
 }

@@ -29,4 +29,16 @@ public final class VisitDate {
     public LocalDate toLocalDate() {
         return this.date;
     }
+
+    public boolean isWeekend() {
+        return dayOfWeek == DayOfWeek.FRIDAY || dayOfWeek == DayOfWeek.SATURDAY;
+    }
+
+    public boolean isWeekday() {
+        return !isWeekend();
+    }
+
+    public int compareDate(final LocalDate date) {
+        return this.date.compareTo(date);
+    }
 }
