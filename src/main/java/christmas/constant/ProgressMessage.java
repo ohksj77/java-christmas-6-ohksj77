@@ -9,7 +9,9 @@ public enum ProgressMessage {
     ORDERED_MENUS("\n<주문 메뉴>"),
     BEFORE_PRICE_SUM("\n<할인 전 총주문 금액>\n%,d원"),
     BENEFIT_LOG("\n<혜택 내역>"),
-    GIVEAWAY("\n<증정 메뉴>");
+    GIVEAWAY("\n<증정 메뉴>"),
+    DISCOUNT_SUM("\n<총혜택 금액>"),
+    MONEY("-%,d원");
 
     private final String message;
 

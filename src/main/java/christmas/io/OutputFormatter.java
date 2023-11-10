@@ -2,6 +2,7 @@ package christmas.io;
 
 import christmas.constant.DiscountPolicyType;
 import christmas.constant.ProgressMessage;
+import christmas.domain.DiscountDetail;
 import christmas.domain.DiscountResults;
 import christmas.domain.Money;
 import christmas.domain.OrderMenus;
@@ -39,5 +40,9 @@ public class OutputFormatter {
                                         element.toDiscountPolicyType().toString(),
                                         element.toDifferenceValue()))
                 .collect(Collectors.joining(NEW_LINE));
+    }
+
+    public String formatMoney(final DiscountDetail discountDetail) {
+        return String.format(ProgressMessage.MONEY.toString(), discountDetail.toDifferenceValue());
     }
 }
