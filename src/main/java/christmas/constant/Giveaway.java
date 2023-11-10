@@ -24,7 +24,12 @@ public enum Giveaway {
                 .orElse(NONE);
     }
 
+    @Override
     public String toString() {
         return this.message;
+    }
+
+    public boolean isPresent() {
+        return this == PRESENT;
     }
 }

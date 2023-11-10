@@ -31,13 +31,13 @@ public class OutputFormatter {
         if (discountResults.hasNoDiscount()) {
             return DiscountPolicyType.NO_DISCOUNT.toString();
         }
-        return discountResults.toDiscountDetails().entrySet().stream()
-                .filter(entry -> !entry.getValue().hasNoValue())
+        return discountResults.toDiscountDetails().stream()
+                .filter(element -> !element.hasNoValue() && !element.isAllPolicy())
                 .map(
-                        entry ->
+                        element ->
                                 String.format(
-                                        entry.getKey().toString(),
-                                        entry.getValue().toDifferenceValue()))
+                                        element.toDiscountPolicyType().toString(),
+                                        element.toDifferenceValue()))
                 .collect(Collectors.joining(NEW_LINE));
     }
 }
