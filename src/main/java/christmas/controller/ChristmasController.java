@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.constant.EventBadge;
 import christmas.constant.Giveaway;
 import christmas.domain.DiscountDetail;
 import christmas.domain.DiscountResults;
@@ -39,6 +40,7 @@ public class ChristmasController {
         findBenefits();
         findDiscountSum();
         findExpectedAmount();
+        findEventBadge();
     }
 
     private void createVisitDate() {
@@ -79,5 +81,10 @@ public class ChristmasController {
     private void findExpectedAmount() {
         final Money money = christmasService.checkExpectedAmount();
         outputView.printExpectedAmount(money);
+    }
+
+    private void findEventBadge() {
+        final EventBadge eventBadge = christmasService.findEventBadge();
+        outputView.printEventBadge(eventBadge);
     }
 }

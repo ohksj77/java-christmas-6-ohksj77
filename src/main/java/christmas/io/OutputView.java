@@ -1,5 +1,6 @@
 package christmas.io;
 
+import christmas.constant.EventBadge;
 import christmas.constant.Giveaway;
 import christmas.constant.ProgressMessage;
 import christmas.domain.DiscountDetail;
@@ -48,5 +49,10 @@ public class OutputView {
     public void printExpectedAmount(final Money money) {
         System.out.println(ProgressMessage.EXPECTED_AMOUNT);
         System.out.println(outputFormatter.formatMoney(money));
+    }
+
+    public void printEventBadge(final EventBadge eventBadge) {
+        System.out.println(ProgressMessage.EVENT_BADGE);
+        System.out.println(eventBadge);
     }
 }

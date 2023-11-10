@@ -11,8 +11,10 @@ public enum ProgressMessage {
     BENEFIT_LOG("\n<혜택 내역>"),
     GIVEAWAY("\n<증정 메뉴>"),
     DISCOUNT_SUM("\n<총혜택 금액>"),
-    MONEY("-%,d원"),
-    EXPECTED_AMOUNT("\n<할인 후 예상 결제 금액>");
+    NEGATIVE_MONEY("-%,d원"),
+    POSITIVE_MONEY("%,d원"),
+    EXPECTED_AMOUNT("\n<할인 후 예상 결제 금액>"),
+    EVENT_BADGE("\n<12월 이벤트 배지>");
 
     private final String message;
 

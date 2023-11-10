@@ -43,10 +43,11 @@ public class OutputFormatter {
     }
 
     public String formatDiscountDetail(final DiscountDetail discountDetail) {
-        return String.format(ProgressMessage.MONEY.toString(), discountDetail.toDifferenceValue());
+        return String.format(
+                ProgressMessage.NEGATIVE_MONEY.toString(), discountDetail.toDifferenceValue());
     }
 
     public String formatMoney(final Money money) {
-        return String.format(ProgressMessage.MONEY.toString(), money.toValue());
+        return String.format(ProgressMessage.POSITIVE_MONEY.toString(), money.toValue());
     }
 }

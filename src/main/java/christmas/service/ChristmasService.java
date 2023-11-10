@@ -1,5 +1,6 @@
 package christmas.service;
 
+import christmas.constant.EventBadge;
 import christmas.constant.Giveaway;
 import christmas.domain.DiscountDetail;
 import christmas.domain.DiscountResults;
@@ -63,5 +64,10 @@ public class ChristmasService {
         final OrderMenus orderMenus = domainRepository.getOrderMenus();
 
         return discountPolicy.discount(orderMenus.beforePriceSum());
+    }
+
+    public EventBadge findEventBadge() {
+        final DiscountDetail discountDetail = calculateDiscountSum();
+        return EventBadge.valueOfAmount(discountDetail.toDifferenceValue());
     }
 }
