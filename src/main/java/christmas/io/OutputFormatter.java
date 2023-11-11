@@ -13,10 +13,9 @@ import java.util.stream.Collectors;
 
 public class OutputFormatter {
 
-    private static final String NEW_LINE = "\n";
-
     public String formatBenefitPreview(final VisitDate visitDate) {
         final LocalDate date = visitDate.toLocalDate();
+
         return String.format(
                 ProgressMessage.BENEFIT_PREVIEW.toString(),
                 date.getMonthValue(),
@@ -39,10 +38,14 @@ public class OutputFormatter {
                                 String.format(
                                         element.toDiscountPolicyType().toString(),
                                         element.toDifferenceValue()))
-                .collect(Collectors.joining(NEW_LINE));
+                .collect(Collectors.joining(ProgressMessage.NEW_LINE.toString()));
     }
 
     public String formatDiscountDetail(final DiscountDetail discountDetail) {
+        if (discountDetail.hasNoValue()) {
+            return String.format(
+                    ProgressMessage.POSITIVE_MONEY.toString(), discountDetail.toDifferenceValue());
+        }
         return String.format(
                 ProgressMessage.NEGATIVE_MONEY.toString(), discountDetail.toDifferenceValue());
     }
