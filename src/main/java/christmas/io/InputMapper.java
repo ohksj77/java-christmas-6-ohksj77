@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 
 public class InputMapper {
 
+    private static final int MENU_INDEX = 0;
+    private static final int PURCHASE_NUM_INDEX = 1;
     private static final String MENUS_DELIMITER = ",";
     private static final String MENU_PRICE_DELIMITER = "-";
 
@@ -24,8 +26,8 @@ public class InputMapper {
     }
 
     private OrderMenu toOrderMenu(final String string) {
-        final String[] strings = string.split(MENU_PRICE_DELIMITER);
-        final Menu menu = Menu.valueOfName(strings[0]);
-        return new OrderMenu(menu, Integer.valueOf(strings[1]));
+        final String[] orders = string.split(MENU_PRICE_DELIMITER);
+        final Menu menu = Menu.valueOfName(orders[MENU_INDEX]);
+        return new OrderMenu(menu, Integer.valueOf(orders[PURCHASE_NUM_INDEX]));
     }
 }
