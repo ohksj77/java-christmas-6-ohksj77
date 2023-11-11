@@ -30,17 +30,17 @@ public class ChristmasController {
         outputView.printGreeting();
         createVisitDate();
         createOrderMenus();
-        findResult();
+        checkResult();
     }
 
-    private void findResult() {
-        findBenefitPreview();
-        findOrderMenus();
-        findGiveaway();
-        findBenefits();
-        findDiscountSum();
-        findExpectedAmount();
-        findEventBadge();
+    private void checkResult() {
+        checkBenefitPreview();
+        checkOrderMenus();
+        checkGiveaway();
+        checkBenefits();
+        checkDiscountSum();
+        checkExpectedAmount();
+        checkEventBadge();
     }
 
     private void createVisitDate() {
@@ -53,37 +53,37 @@ public class ChristmasController {
         christmasService.saveOrderMenus(orderMenus);
     }
 
-    private void findBenefitPreview() {
+    private void checkBenefitPreview() {
         final VisitDate visitDate = christmasService.getVisitDate();
         outputView.printBenefitPreview(visitDate);
     }
 
-    private void findOrderMenus() {
+    private void checkOrderMenus() {
         final OrderMenus orderMenus = christmasService.getOrderMenus();
         outputView.printOrderMenus(orderMenus);
     }
 
-    private void findGiveaway() {
+    private void checkGiveaway() {
         final Giveaway giveaway = christmasService.calculateGiveaway();
         outputView.printGiveaway(giveaway);
     }
 
-    private void findBenefits() {
+    private void checkBenefits() {
         final DiscountResults discountResults = christmasService.calculateBenefits();
         outputView.printDiscountResults(discountResults);
     }
 
-    private void findDiscountSum() {
+    private void checkDiscountSum() {
         final DiscountDetail discountDetail = christmasService.calculateDiscountSum();
         outputView.printDiscountSum(discountDetail);
     }
 
-    private void findExpectedAmount() {
+    private void checkExpectedAmount() {
         final Money money = christmasService.checkExpectedAmount();
         outputView.printExpectedAmount(money);
     }
 
-    private void findEventBadge() {
+    private void checkEventBadge() {
         final EventBadge eventBadge = christmasService.findEventBadge();
         outputView.printEventBadge(eventBadge);
     }

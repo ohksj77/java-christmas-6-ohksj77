@@ -14,7 +14,7 @@ public final class OrderMenus {
     private static final String NEW_LINE = "\n";
     private final List<OrderMenu> elements;
 
-    public OrderMenus(List<OrderMenu> elements) {
+    public OrderMenus(final List<OrderMenu> elements) {
         validate(elements);
         this.elements = List.copyOf(elements);
     }

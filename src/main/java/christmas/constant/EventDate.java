@@ -6,7 +6,7 @@ public enum EventDate {
     CHRISTMAS(LocalDate.of(2023, 12, 25)),
     BEFORE_D_DAY_START(LocalDate.of(2023, 11, 30)),
     AFTER_D_DAY_END(LocalDate.of(2023, 12, 26)),
-    START_OF_DECEMBER(LocalDate.of(2023, 12, 1));
+    START_OF_EVENT(LocalDate.of(2023, 12, 1));
 
     private final LocalDate value;
 

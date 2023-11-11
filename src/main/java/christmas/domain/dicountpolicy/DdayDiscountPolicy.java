@@ -41,7 +41,7 @@ public class DdayDiscountPolicy implements DiscountPolicy {
     private DiscountDetail calculateDiscount() {
         final int discountAmount =
                 INIT_MONEY
-                        + visitDate.compareDate(EventDate.START_OF_DECEMBER.toValue())
+                        + visitDate.compareDate(EventDate.START_OF_EVENT.toValue())
                                 * MONEY_UNIT_PER_DAY;
         return toDiscountDetail(discountAmount);
     }
