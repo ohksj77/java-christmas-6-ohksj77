@@ -25,8 +25,8 @@ public class InputMapper {
                 .collect(Collectors.collectingAndThen(Collectors.toList(), OrderMenus::new));
     }
 
-    private OrderMenu toOrderMenu(final String string) {
-        final String[] orders = string.split(MENU_PRICE_DELIMITER);
+    private OrderMenu toOrderMenu(final String input) {
+        final String[] orders = input.split(MENU_PRICE_DELIMITER);
         final Menu menu = Menu.valueOfName(orders[MENU_INDEX]);
         return new OrderMenu(menu, Integer.valueOf(orders[PURCHASE_NUM_INDEX]));
     }

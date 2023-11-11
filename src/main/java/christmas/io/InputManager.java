@@ -31,10 +31,10 @@ public class InputManager {
                 });
     }
 
-    private <T> T read(final Supplier<T> readDomain) {
+    private <T> T read(final Supplier<T> readInput) {
         while (true) {
             try {
-                return readDomain.get();
+                return readInput.get();
             } catch (final IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
