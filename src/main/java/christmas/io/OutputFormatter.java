@@ -3,7 +3,7 @@ package christmas.io;
 import christmas.constant.DiscountPolicyType;
 import christmas.constant.ProgressMessage;
 import christmas.domain.DiscountDetail;
-import christmas.domain.DiscountResults;
+import christmas.domain.DiscountDetails;
 import christmas.domain.Money;
 import christmas.domain.OrderMenus;
 import christmas.domain.VisitDate;
@@ -27,12 +27,12 @@ public class OutputFormatter {
         return String.format(ProgressMessage.BEFORE_PRICE_SUM.toString(), money.toValue());
     }
 
-    public String formatDiscountResults(final DiscountResults discountResults) {
-        if (discountResults.hasNoDiscount()) {
+    public String formatDiscountDetails(final DiscountDetails discountDetails) {
+        if (discountDetails.hasNoDiscount()) {
             return DiscountPolicyType.NO_DISCOUNT.toString();
         }
-        return discountResults.toDiscountDetails().stream()
-                .filter(element -> !element.hasNoValue() && !element.isAllPolicy())
+        return discountDetails.toDiscountDetails().stream()
+                .filter(element -> !element.hasNoDifference() && !element.isAllPolicy())
                 .map(
                         element ->
                                 String.format(
@@ -42,7 +42,7 @@ public class OutputFormatter {
     }
 
     public String formatDiscountDetail(final DiscountDetail discountDetail) {
-        if (discountDetail.hasNoValue()) {
+        if (discountDetail.hasNoDifference()) {
             return String.format(
                     ProgressMessage.POSITIVE_MONEY.toString(), discountDetail.toDifferenceValue());
         }

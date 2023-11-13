@@ -5,20 +5,20 @@ import christmas.constant.ErrorMessage;
 
 import java.util.List;
 
-public final class DiscountResults {
+public final class DiscountDetails {
 
-    private final List<DiscountDetail> discountDetails;
+    private final List<DiscountDetail> elements;
 
-    public DiscountResults(final List<DiscountDetail> discountDetails) {
-        this.discountDetails = List.copyOf(discountDetails);
+    public DiscountDetails(final List<DiscountDetail> elements) {
+        this.elements = List.copyOf(elements);
     }
 
-    public DiscountResults() {
-        this.discountDetails = List.of();
+    public DiscountDetails() {
+        this.elements = List.of();
     }
 
     public DiscountDetail getDiscountDetailSum() {
-        return discountDetails.stream()
+        return elements.stream()
                 .filter(discountDetail -> discountDetail.hasDiscountPolicy(DiscountPolicyType.ALL))
                 .findFirst()
                 .orElseThrow(
@@ -28,10 +28,10 @@ public final class DiscountResults {
     }
 
     public boolean hasNoDiscount() {
-        return discountDetails.isEmpty() || getDiscountDetailSum().hasNoValue();
+        return elements.isEmpty() || getDiscountDetailSum().hasNoDifference();
     }
 
     public List<DiscountDetail> toDiscountDetails() {
-        return List.copyOf(discountDetails);
+        return List.copyOf(elements);
     }
 }

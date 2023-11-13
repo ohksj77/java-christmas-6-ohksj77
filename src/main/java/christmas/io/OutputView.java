@@ -4,7 +4,7 @@ import christmas.constant.EventBadge;
 import christmas.constant.Giveaway;
 import christmas.constant.ProgressMessage;
 import christmas.domain.DiscountDetail;
-import christmas.domain.DiscountResults;
+import christmas.domain.DiscountDetails;
 import christmas.domain.Money;
 import christmas.domain.OrderMenus;
 import christmas.domain.VisitDate;
@@ -36,9 +36,9 @@ public class OutputView {
         System.out.println(giveaway);
     }
 
-    public void printDiscountResults(final DiscountResults discountResults) {
+    public void printDiscountDetails(final DiscountDetails discountDetails) {
         System.out.println(ProgressMessage.BENEFIT_LOG);
-        System.out.println(outputFormatter.formatDiscountResults(discountResults));
+        System.out.println(outputFormatter.formatDiscountDetails(discountDetails));
     }
 
     public void printDiscountSum(final DiscountDetail discountDetail) {

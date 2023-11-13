@@ -20,7 +20,7 @@ public final class DiscountDetail {
         return this.discountPolicyType;
     }
 
-    public boolean hasNoValue() {
+    public boolean hasNoDifference() {
         return difference.hasNoValue();
     }
 

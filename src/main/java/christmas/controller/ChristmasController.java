@@ -3,7 +3,7 @@ package christmas.controller;
 import christmas.constant.EventBadge;
 import christmas.constant.Giveaway;
 import christmas.domain.DiscountDetail;
-import christmas.domain.DiscountResults;
+import christmas.domain.DiscountDetails;
 import christmas.domain.Money;
 import christmas.domain.OrderMenus;
 import christmas.domain.VisitDate;
@@ -69,8 +69,8 @@ public class ChristmasController {
     }
 
     private void checkBenefits() {
-        final DiscountResults discountResults = christmasService.calculateBenefits();
-        outputView.printDiscountResults(discountResults);
+        final DiscountDetails discountDetails = christmasService.calculateBenefits();
+        outputView.printDiscountDetails(discountDetails);
     }
 
     private void checkDiscountSum() {

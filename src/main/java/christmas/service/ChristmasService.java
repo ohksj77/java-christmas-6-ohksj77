@@ -3,7 +3,7 @@ package christmas.service;
 import christmas.constant.EventBadge;
 import christmas.constant.Giveaway;
 import christmas.domain.DiscountDetail;
-import christmas.domain.DiscountResults;
+import christmas.domain.DiscountDetails;
 import christmas.domain.Money;
 import christmas.domain.OrderMenus;
 import christmas.domain.VisitDate;
@@ -42,7 +42,7 @@ public class ChristmasService {
         return giveaway;
     }
 
-    public DiscountResults calculateBenefits() {
+    public DiscountDetails calculateBenefits() {
         final OrderMenus orderMenus = domainRepository.getOrderMenus();
         final VisitDate visitDate = domainRepository.getVisitDate();
         final Giveaway giveaway = domainRepository.getGiveaway();
@@ -51,7 +51,7 @@ public class ChristmasService {
                 new CompositeDiscountPolicy(visitDate, orderMenus, giveaway);
         domainRepository.save(discountPolicy);
 
-        return discountPolicy.toDiscountResults();
+        return discountPolicy.toDiscountDetails();
     }
 
     public DiscountDetail calculateDiscountSum() {

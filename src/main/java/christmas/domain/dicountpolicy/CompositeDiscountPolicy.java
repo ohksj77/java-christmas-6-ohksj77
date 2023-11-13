@@ -3,7 +3,7 @@ package christmas.domain.dicountpolicy;
 import christmas.constant.DiscountPolicyType;
 import christmas.constant.Giveaway;
 import christmas.domain.DiscountDetail;
-import christmas.domain.DiscountResults;
+import christmas.domain.DiscountDetails;
 import christmas.domain.Money;
 import christmas.domain.OrderMenus;
 import christmas.domain.VisitDate;
@@ -17,14 +17,14 @@ public class CompositeDiscountPolicy implements DiscountPolicy {
     private static final int MIN_PURCHASE_VALUE_FOR_DISCOUNT = 10000;
     private final DiscountCondition mainDiscountCondition;
     private final List<DiscountPolicy> discountPolicies;
-    private final DiscountResults discountResults;
+    private final DiscountDetails discountDetails;
 
     public CompositeDiscountPolicy(
             final VisitDate visitDate, final OrderMenus orderMenus, final Giveaway giveaway) {
         this.mainDiscountCondition =
                 () -> orderMenus.toBeforePriceSumValue() >= MIN_PURCHASE_VALUE_FOR_DISCOUNT;
         this.discountPolicies = initializeDiscountPolicies(visitDate, orderMenus);
-        this.discountResults = organizeResultsIfAvailable(giveaway);
+        this.discountDetails = organizeResultsIfAvailable(giveaway);
     }
 
     private List<DiscountPolicy> initializeDiscountPolicies(
@@ -37,9 +37,9 @@ public class CompositeDiscountPolicy implements DiscountPolicy {
                 new SpecialDiscountPolicy(visitDate));
     }
 
-    private DiscountResults organizeResultsIfAvailable(final Giveaway giveaway) {
+    private DiscountDetails organizeResultsIfAvailable(final Giveaway giveaway) {
         if (isUnavailableToDiscount()) {
-            return new DiscountResults();
+            return new DiscountDetails();
         }
         return organizeResults(giveaway);
     }
@@ -48,13 +48,13 @@ public class CompositeDiscountPolicy implements DiscountPolicy {
         return !mainDiscountCondition.isProperToDiscount();
     }
 
-    private DiscountResults organizeResults(final Giveaway giveaway) {
+    private DiscountDetails organizeResults(final Giveaway giveaway) {
         final List<DiscountDetail> results = calculateDiscounts();
         if (giveaway.exists()) {
             results.add(new DiscountDetail(DEFAULT_GIVEAWAY_DISCOUNT, DiscountPolicyType.GIVEAWAY));
         }
         results.add(new DiscountDetail(discountSum(results), DiscountPolicyType.ALL));
-        return new DiscountResults(results);
+        return new DiscountDetails(results);
     }
 
     private List<DiscountDetail> calculateDiscounts() {
@@ -72,7 +72,7 @@ public class CompositeDiscountPolicy implements DiscountPolicy {
         if (isUnavailableToDiscount()) {
             return new DiscountDetail(NO_DISCOUNT_DIFFERENCE, DiscountPolicyType.NO_DISCOUNT);
         }
-        return discountResults.getDiscountDetailSum();
+        return discountDetails.getDiscountDetailSum();
     }
 
     @Override
@@ -84,7 +84,7 @@ public class CompositeDiscountPolicy implements DiscountPolicy {
         return result;
     }
 
-    public DiscountResults toDiscountResults() {
-        return this.discountResults;
+    public DiscountDetails toDiscountDetails() {
+        return this.discountDetails;
     }
 }
