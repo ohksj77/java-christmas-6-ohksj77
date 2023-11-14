@@ -41,7 +41,7 @@ public final class OrderMenus {
     }
 
     public Money beforePriceSum() {
-        final int sum = elements.stream().mapToInt(OrderMenu::beforePrice).sum();
+        final int sum = elements.stream().mapToInt(OrderMenu::beforeDiscountPrice).sum();
         return new Money(sum);
     }
 

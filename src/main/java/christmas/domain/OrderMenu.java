@@ -20,7 +20,7 @@ public final class OrderMenu {
         return menu.toMenuType();
     }
 
-    public int beforePrice() {
+    public int beforeDiscountPrice() {
         return menu.toPrice() * purchaseNum.toValue();
     }
 
