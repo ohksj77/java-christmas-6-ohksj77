@@ -32,7 +32,7 @@ class SpecialDiscountPolicyTest {
             assertThat(discountDetail.toDifferenceValue()).isEqualTo(defaultDiscountValue);
         }
 
-        @DisplayName("적합하지 않은 날짜의 경우 0원의 할인 금액을 반환한다.")
+        @DisplayName("적합하지 않은 날짜의 경우 할인 금액이 없도록 반환한다.")
         @Test
         void invalidDate() {
             // given
