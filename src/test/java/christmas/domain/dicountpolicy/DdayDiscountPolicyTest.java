@@ -17,7 +17,7 @@ class DdayDiscountPolicyTest {
     @Nested
     class CalculateDiscountAmount {
 
-        @DisplayName("크리스마스의 경우 최대 할인 금액을 반환하는가")
+        @DisplayName("크리스마스의 경우 최대 할인 금액을 반환한다.")
         @Test
         void dday() {
             // given
@@ -30,7 +30,7 @@ class DdayDiscountPolicyTest {
             assertThat(discountDetail.toDifferenceValue()).isEqualTo(3400);
         }
 
-        @DisplayName("12월 1일인 경우 최소 할인 금액을 반환하는가")
+        @DisplayName("12월 1일인 경우 최소 할인 금액을 반환한다.")
         @Test
         void december1st() {
             // given
@@ -43,7 +43,7 @@ class DdayDiscountPolicyTest {
             assertThat(discountDetail.toDifferenceValue()).isEqualTo(1000);
         }
 
-        @DisplayName("크리스마스 다음날의 경우 0원을 반환하는가")
+        @DisplayName("크리스마스 다음날의 경우 0원을 반환한다.")
         @Test
         void afterDday() {
             // given
@@ -57,7 +57,7 @@ class DdayDiscountPolicyTest {
         }
     }
 
-    @DisplayName("할인 요청시 정상적인 할인 정보는 반환하는가")
+    @DisplayName("할인 요청시 정상적인 할인 정보는 반환한다.")
     @Test
     void discount() {
         // given
@@ -69,6 +69,13 @@ class DdayDiscountPolicyTest {
         final Money result = ddayDiscountPolicy.discount(new Money(amount));
 
         // then
-        assertThat(result.toValue()).isEqualTo(amount - 1000 - (date - 1) * 100);
+        final int defaultDiscountValue = 1000;
+        final int increaseAmountUnit = 100;
+        final int numOfNoIncreaseDate = 1;
+        assertThat(result.toValue())
+                .isEqualTo(
+                        amount
+                                - defaultDiscountValue
+                                - (date - numOfNoIncreaseDate) * increaseAmountUnit);
     }
 }
