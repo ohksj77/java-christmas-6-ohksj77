@@ -23,7 +23,7 @@ public class OutputFormatter {
     }
 
     public String formatBeforePriceSum(final OrderMenus orderMenus) {
-        final Money money = orderMenus.beforePriceSum();
+        final Money money = orderMenus.beforeDiscountPriceSum();
         return String.format(ProgressMessage.BEFORE_PRICE_SUM.toString(), money.toValue());
     }
 

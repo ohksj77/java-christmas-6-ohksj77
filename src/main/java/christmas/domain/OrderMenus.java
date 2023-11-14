@@ -40,13 +40,13 @@ public final class OrderMenus {
         return !orderMenu.toMenuType().equals(MenuType.DRINK);
     }
 
-    public Money beforePriceSum() {
+    public Money beforeDiscountPriceSum() {
         final int sum = elements.stream().mapToInt(OrderMenu::beforeDiscountPrice).sum();
         return new Money(sum);
     }
 
-    public Giveaway checkGiveAway() {
-        return Giveaway.valueOfPriceSum(beforePriceSum());
+    public Giveaway checkGiveaway() {
+        return Giveaway.valueOfPriceSum(beforeDiscountPriceSum());
     }
 
     public boolean hasDessert() {
@@ -76,8 +76,8 @@ public final class OrderMenus {
         return hasMenuType(OrderMenu::isMainDish);
     }
 
-    public int toBeforePriceSumValue() {
-        return beforePriceSum().toValue();
+    public int toBeforeDiscountPriceSumValue() {
+        return beforeDiscountPriceSum().toValue();
     }
 
     @Override

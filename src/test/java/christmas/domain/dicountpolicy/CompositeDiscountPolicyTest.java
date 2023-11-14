@@ -67,7 +67,7 @@ class CompositeDiscountPolicyTest {
                 new OrderMenus(List.of(new OrderMenu(Menu.CHRISTMAS_PASTA, 10)));
         final CompositeDiscountPolicy compositeDiscountPolicy =
                 new CompositeDiscountPolicy(new VisitDate(25), orderMenus, Giveaway.PRESENT);
-        final Money beforeMoney = orderMenus.beforePriceSum();
+        final Money beforeMoney = orderMenus.beforeDiscountPriceSum();
 
         // when
         final Money result = compositeDiscountPolicy.discount(beforeMoney);

@@ -22,7 +22,7 @@ public class CompositeDiscountPolicy implements DiscountPolicy {
     public CompositeDiscountPolicy(
             final VisitDate visitDate, final OrderMenus orderMenus, final Giveaway giveaway) {
         this.mainDiscountCondition =
-                () -> orderMenus.toBeforePriceSumValue() >= MIN_PURCHASE_VALUE_FOR_DISCOUNT;
+                () -> orderMenus.toBeforeDiscountPriceSumValue() >= MIN_PURCHASE_VALUE_FOR_DISCOUNT;
         this.discountPolicies = initializeDiscountPolicies(visitDate, orderMenus);
         this.discountDetails = organizeResultsIfAvailable(giveaway);
     }

@@ -37,7 +37,7 @@ public class ChristmasService {
 
     public Giveaway calculateGiveaway() {
         final OrderMenus orderMenus = domainRepository.getOrderMenus();
-        final Giveaway giveaway = orderMenus.checkGiveAway();
+        final Giveaway giveaway = orderMenus.checkGiveaway();
         domainRepository.saveGiveaway(giveaway);
         return giveaway;
     }
@@ -63,7 +63,7 @@ public class ChristmasService {
         final DiscountPolicy discountPolicy = domainRepository.getDiscountPolicy();
         final OrderMenus orderMenus = domainRepository.getOrderMenus();
 
-        return discountPolicy.discount(orderMenus.beforePriceSum());
+        return discountPolicy.discount(orderMenus.beforeDiscountPriceSum());
     }
 
     public EventBadge findEventBadge() {
