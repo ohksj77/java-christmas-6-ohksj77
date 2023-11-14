@@ -19,7 +19,7 @@ public enum Giveaway {
 
     public static Giveaway valueOfPriceSum(final Money money) {
         return Arrays.stream(values())
-                .filter(value -> value.amount < money.toValue())
+                .filter(value -> value.amount <= money.toValue())
                 .max(Comparator.comparingInt(before -> before.amount))
                 .orElse(NONE);
     }
