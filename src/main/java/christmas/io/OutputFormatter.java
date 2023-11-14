@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class OutputFormatter {
 
     public String formatBenefitPreview(final VisitDate visitDate) {
-        final LocalDate date = visitDate.toLocalDate();
+        final LocalDate date = visitDate.toDate();
 
         return String.format(
                 ProgressMessage.BENEFIT_PREVIEW.toString(),

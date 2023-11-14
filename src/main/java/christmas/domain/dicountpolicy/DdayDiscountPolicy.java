@@ -19,7 +19,7 @@ public class DdayDiscountPolicy implements DiscountPolicy {
         this.visitDate = visitDate;
         this.discountCondition =
                 () -> {
-                    final LocalDate date = this.visitDate.toLocalDate();
+                    final LocalDate date = this.visitDate.toDate();
                     return date.isAfter(EventDate.BEFORE_D_DAY_START.toValue())
                             && date.isBefore(EventDate.AFTER_D_DAY_END.toValue());
                 };

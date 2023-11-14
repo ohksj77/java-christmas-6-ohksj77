@@ -17,7 +17,7 @@ public class SpecialDiscountPolicy implements DiscountPolicy {
     public SpecialDiscountPolicy(final VisitDate visitDate) {
         this.discountCondition =
                 () -> {
-                    final LocalDate date = visitDate.toLocalDate();
+                    final LocalDate date = visitDate.toDate();
                     return date.getDayOfWeek() == DayOfWeek.SUNDAY
                             || date.equals(EventDate.CHRISTMAS.toValue());
                 };

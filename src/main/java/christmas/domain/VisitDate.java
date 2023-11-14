@@ -24,7 +24,7 @@ public final class VisitDate {
         }
     }
 
-    public LocalDate toLocalDate() {
+    public LocalDate toDate() {
         return this.date;
     }
 
