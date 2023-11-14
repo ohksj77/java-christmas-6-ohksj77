@@ -116,4 +116,61 @@ class OrderMenuTest {
         // then
         assertThat(result).isEqualTo(expected);
     }
+
+    @DisplayName("같은 값을 갖는지 비교시")
+    @Nested
+    class Equals {
+
+        @DisplayName("같은 객체의 경우 true를 반환한다.")
+        @Test
+        void sameInstance() {
+            // given
+            final OrderMenu orderMenu = new OrderMenu(Menu.CHRISTMAS_PASTA, 1);
+
+            // when
+            final boolean result = orderMenu.equals(orderMenu);
+
+            // then
+            assertThat(result).isTrue();
+        }
+
+        @DisplayName("같은 메뉴를 가진 다른 객체의 경우 true를 반환한다.")
+        @Test
+        void sameMenuValue() {
+            // given
+            final OrderMenu orderMenu = new OrderMenu(Menu.CHRISTMAS_PASTA, 1);
+
+            // when
+            final boolean result = orderMenu.equals(new OrderMenu(Menu.CHRISTMAS_PASTA, 3));
+
+            // then
+            assertThat(result).isTrue();
+        }
+
+        @DisplayName("null의 경우 false를 반환한다.")
+        @Test
+        void nullValue() {
+            // given
+            final OrderMenu orderMenu = new OrderMenu(Menu.CHRISTMAS_PASTA, 1);
+
+            // when
+            final boolean result = orderMenu.equals(null);
+
+            // then
+            assertThat(result).isFalse();
+        }
+
+        @DisplayName("다른 메뉴를 가진 객체의 경우 false를 반환한다.")
+        @Test
+        void differentValue() {
+            // given
+            final OrderMenu orderMenu = new OrderMenu(Menu.CHRISTMAS_PASTA, 1);
+
+            // when
+            final boolean result = orderMenu.equals(new OrderMenu(Menu.CAESAR_SALAD, 1));
+
+            // then
+            assertThat(result).isFalse();
+        }
+    }
 }
