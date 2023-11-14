@@ -1,6 +1,7 @@
 package christmas.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import christmas.constant.Giveaway;
 import christmas.constant.Menu;
@@ -158,5 +159,47 @@ class OrderMenusTest {
 
         // then
         assertThat(result).isEqualTo(orderMenu.beforeDiscountPrice());
+    }
+
+    @DisplayName("생성시")
+    @Nested
+    class CreateValidation {
+
+        @Test
+        @DisplayName("음료만 주문시 예외를 던진다.")
+        void onlyDrink() {
+            // given
+            // when
+            // then
+            assertThatThrownBy(() -> new OrderMenus(List.of(new OrderMenu(Menu.CHAMPAGNE, 3))));
+        }
+
+        @Test
+        @DisplayName("20개 이상의 메뉴 주문시 예외를 던진다.")
+        void over20Menus() {
+            // given
+            // when
+            // then
+            assertThatThrownBy(
+                    () ->
+                            new OrderMenus(
+                                    List.of(
+                                            new OrderMenu(Menu.CHAMPAGNE, 15),
+                                            new OrderMenu(Menu.CAESAR_SALAD, 10))));
+        }
+
+        @Test
+        @DisplayName("메뉴 중복시 예외를 던진다.")
+        void hasDuplicateMenus() {
+            // given
+            // when
+            // then
+            assertThatThrownBy(
+                    () ->
+                            new OrderMenus(
+                                    List.of(
+                                            new OrderMenu(Menu.SEAFOOD_PASTA, 5),
+                                            new OrderMenu(Menu.SEAFOOD_PASTA, 1))));
+        }
     }
 }
