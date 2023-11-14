@@ -40,7 +40,7 @@ public class DomainRepository {
         return get(() -> this.giveaway);
     }
 
-    public void save(final DiscountPolicy discountPolicy) {
+    public void saveDiscountPolicy(final DiscountPolicy discountPolicy) {
         this.discountPolicy = discountPolicy;
     }
 

@@ -49,7 +49,7 @@ public class ChristmasService {
 
         final CompositeDiscountPolicy discountPolicy =
                 new CompositeDiscountPolicy(visitDate, orderMenus, giveaway);
-        domainRepository.save(discountPolicy);
+        domainRepository.saveDiscountPolicy(discountPolicy);
 
         return discountPolicy.toDiscountDetails();
     }

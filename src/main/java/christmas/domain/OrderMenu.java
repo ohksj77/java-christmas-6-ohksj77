@@ -4,6 +4,7 @@ import christmas.constant.Menu;
 import christmas.constant.MenuType;
 import christmas.constant.ProgressMessage;
 
+import java.util.Objects;
 import java.util.function.Predicate;
 
 public final class OrderMenu {
@@ -45,5 +46,22 @@ public final class OrderMenu {
 
     public int toPurchaseNumValue() {
         return this.purchaseNum.toValue();
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final OrderMenu orderMenu = (OrderMenu) o;
+        return menu == orderMenu.menu;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(menu);
     }
 }

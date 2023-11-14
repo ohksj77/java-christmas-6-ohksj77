@@ -21,11 +21,16 @@ public final class OrderMenus {
 
     private void validate(final List<OrderMenu> orderMenus) {
         if (orderMenus.isEmpty()
-                || orderMenus.size() > MAX_ORDER_MENUS_SIZE
+                || hasMoreThanMaxSize(orderMenus)
                 || isDuplicate(orderMenus)
                 || hasOnlyDrink(orderMenus)) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_ORDER_MENUS.toString());
         }
+    }
+
+    private boolean hasMoreThanMaxSize(final List<OrderMenu> orderMenus) {
+        return orderMenus.stream().mapToInt(OrderMenu::toPurchaseNumValue).sum()
+                > MAX_ORDER_MENUS_SIZE;
     }
 
     private boolean isDuplicate(final List<OrderMenu> orderMenus) {
