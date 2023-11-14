@@ -31,7 +31,7 @@ public class OutputFormatter {
         if (discountDetails.hasNoDiscount()) {
             return DiscountPolicyType.NO_DISCOUNT.toString();
         }
-        return discountDetails.toDiscountDetails().stream()
+        return discountDetails.toElements().stream()
                 .filter(element -> !element.hasNoDifference() && !element.isAllPolicy())
                 .map(
                         element ->

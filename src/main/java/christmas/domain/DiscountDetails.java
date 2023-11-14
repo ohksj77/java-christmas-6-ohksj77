@@ -31,7 +31,7 @@ public final class DiscountDetails {
         return elements.isEmpty() || calculateDiscountDetailSum().hasNoDifference();
     }
 
-    public List<DiscountDetail> toDiscountDetails() {
+    public List<DiscountDetail> toElements() {
         return List.copyOf(elements);
     }
 }
