@@ -17,7 +17,7 @@ public final class DiscountDetails {
         this.elements = List.of();
     }
 
-    public DiscountDetail getDiscountDetailSum() {
+    public DiscountDetail calculateDiscountDetailSum() {
         return elements.stream()
                 .filter(discountDetail -> discountDetail.hasDiscountPolicy(DiscountPolicyType.ALL))
                 .findFirst()
@@ -28,7 +28,7 @@ public final class DiscountDetails {
     }
 
     public boolean hasNoDiscount() {
-        return elements.isEmpty() || getDiscountDetailSum().hasNoDifference();
+        return elements.isEmpty() || calculateDiscountDetailSum().hasNoDifference();
     }
 
     public List<DiscountDetail> toDiscountDetails() {
