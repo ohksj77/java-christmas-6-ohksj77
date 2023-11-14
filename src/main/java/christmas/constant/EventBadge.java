@@ -19,7 +19,7 @@ public enum EventBadge {
 
     public static EventBadge valueOfAmount(final int money) {
         return Arrays.stream(values())
-                .filter(eventBadge -> eventBadge.amount < money)
+                .filter(eventBadge -> eventBadge.amount <= money)
                 .max(Comparator.comparing(EventBadge::toAmount))
                 .orElse(NONE);
     }
