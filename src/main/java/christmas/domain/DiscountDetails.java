@@ -1,6 +1,5 @@
 package christmas.domain;
 
-import christmas.constant.DiscountPolicyType;
 import christmas.constant.ErrorMessage;
 
 import java.util.List;
@@ -19,7 +18,7 @@ public final class DiscountDetails {
 
     public DiscountDetail calculateDiscountDetailSum() {
         return elements.stream()
-                .filter(discountDetail -> discountDetail.hasDiscountPolicy(DiscountPolicyType.ALL))
+                .filter(DiscountDetail::isAllPolicy)
                 .findFirst()
                 .orElseThrow(
                         () ->

@@ -19,4 +19,8 @@ public enum DiscountPolicyType {
     public String toString() {
         return this.message;
     }
+
+    public boolean isAll() {
+        return this == ALL;
+    }
 }
