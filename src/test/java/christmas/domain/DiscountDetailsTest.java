@@ -1,6 +1,7 @@
 package christmas.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import christmas.constant.DiscountPolicyType;
 
@@ -13,22 +14,38 @@ import java.util.List;
 @DisplayName("할인 정보 일급 컬렉션")
 class DiscountDetailsTest {
 
-    @DisplayName("할인 금액 계산 요청시 할인 금액 총액을 반환한다.")
-    @Test
-    void calculateDiscountSum() {
-        // given
-        final int expected = 10000;
-        final DiscountDetails discountDetails =
-                new DiscountDetails(
-                        List.of(
-                                new DiscountDetail(expected, DiscountPolicyType.ALL),
-                                new DiscountDetail(expected, DiscountPolicyType.WEEKDAY)));
+    @DisplayName("할인 금액 계산 요청시")
+    @Nested
+    class CalculateDiscountSum {
 
-        // when
-        final DiscountDetail discountDetail = discountDetails.calculateDiscountSum();
+        @DisplayName("할인 금액 총액을 반환한다.")
+        @Test
+        void elementsExists() {
+            // given
+            final int expected = 10000;
+            final DiscountDetails discountDetails =
+                    new DiscountDetails(
+                            List.of(
+                                    new DiscountDetail(expected, DiscountPolicyType.ALL),
+                                    new DiscountDetail(expected, DiscountPolicyType.WEEKDAY)));
 
-        // then
-        assertThat(discountDetail.toDifferenceValue()).isEqualTo(expected);
+            // when
+            final DiscountDetail discountDetail = discountDetails.calculateDiscountSum();
+
+            // then
+            assertThat(discountDetail.toDifferenceValue()).isEqualTo(expected);
+        }
+
+        @DisplayName("요소가 비어있는 경우 예외를 던진다.")
+        @Test
+        void noElements() {
+            // given
+            final DiscountDetails discountDetails = new DiscountDetails();
+            // when
+            // then
+            assertThatThrownBy(discountDetails::calculateDiscountSum)
+                    .isInstanceOf(IllegalStateException.class);
+        }
     }
 
     @DisplayName("할인 금액이 존재 여부 확인 요청시")
