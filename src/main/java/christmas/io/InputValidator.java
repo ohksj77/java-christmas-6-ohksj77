@@ -6,7 +6,8 @@ import java.util.regex.Pattern;
 
 public class InputValidator {
 
-    private static final Pattern ORDER_MENUS_PATTER = Pattern.compile("([가-힣]+-[0-9]+,?)+");
+    private static final Pattern ORDER_MENUS_PATTER =
+            Pattern.compile("^([^,\\d]+-\\d+,)*([^,\\d]+-\\d+)$");
 
     public void validateVisitDate(final String input) {
         if (isNotNumeric(input)) {
