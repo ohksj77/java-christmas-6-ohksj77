@@ -72,7 +72,7 @@ public class CompositeDiscountPolicy implements DiscountPolicy {
         if (isUnavailableToDiscount()) {
             return new DiscountDetail(NO_DISCOUNT_DIFFERENCE, DiscountPolicyType.NO_DISCOUNT);
         }
-        return discountDetails.calculateDiscountDetailSum();
+        return discountDetails.calculateDiscountSum();
     }
 
     @Override
