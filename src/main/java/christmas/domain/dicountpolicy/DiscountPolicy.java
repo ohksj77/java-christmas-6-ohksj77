@@ -5,7 +5,7 @@ import christmas.domain.DiscountDetail;
 import christmas.domain.Money;
 
 public abstract class DiscountPolicy {
-    protected static final int NO_DISCOUNT_DIFFERENCE = 0;
+    private static final int NO_DISCOUNT_DIFFERENCE = 0;
     protected final DiscountCondition discountCondition;
 
     protected DiscountPolicy(final DiscountCondition discountCondition) {
