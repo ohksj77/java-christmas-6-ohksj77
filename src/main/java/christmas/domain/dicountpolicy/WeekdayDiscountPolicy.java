@@ -5,7 +5,7 @@ import christmas.domain.DiscountDetail;
 import christmas.domain.OrderMenus;
 import christmas.domain.VisitDate;
 
-public class WeekdayDiscountPolicy extends DiscountPolicy {
+public final class WeekdayDiscountPolicy extends DiscountPolicy {
 
     private static final int DISCOUNT_PER_MENU = 2023;
     private final OrderMenus orderMenus;

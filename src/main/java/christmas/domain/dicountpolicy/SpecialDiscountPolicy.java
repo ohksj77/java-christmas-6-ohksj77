@@ -8,7 +8,7 @@ import christmas.domain.VisitDate;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
-public class SpecialDiscountPolicy extends DiscountPolicy {
+public final class SpecialDiscountPolicy extends DiscountPolicy {
 
     private static final int DISCOUNT_UNIT = 1000;
 

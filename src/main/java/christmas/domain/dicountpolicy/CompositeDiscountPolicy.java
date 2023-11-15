@@ -11,7 +11,7 @@ import christmas.domain.VisitDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CompositeDiscountPolicy extends DiscountPolicy {
+public final class CompositeDiscountPolicy extends DiscountPolicy {
 
     private static final int DEFAULT_GIVEAWAY_DISCOUNT = 25000;
     private static final int MIN_PURCHASE_VALUE_FOR_DISCOUNT = 10000;

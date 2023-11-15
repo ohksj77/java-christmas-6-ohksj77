@@ -7,7 +7,7 @@ import christmas.domain.VisitDate;
 
 import java.time.LocalDate;
 
-public class DdayDiscountPolicy extends DiscountPolicy {
+public final class DdayDiscountPolicy extends DiscountPolicy {
 
     private static final int INIT_MONEY = 1000;
     private static final int MONEY_UNIT_PER_DAY = 100;
