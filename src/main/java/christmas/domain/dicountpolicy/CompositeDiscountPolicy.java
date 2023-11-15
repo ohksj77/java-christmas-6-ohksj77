@@ -11,18 +11,16 @@ import christmas.domain.VisitDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CompositeDiscountPolicy implements DiscountPolicy {
+public class CompositeDiscountPolicy extends DiscountPolicy {
 
     private static final int DEFAULT_GIVEAWAY_DISCOUNT = 25000;
     private static final int MIN_PURCHASE_VALUE_FOR_DISCOUNT = 10000;
-    private final DiscountCondition mainDiscountCondition;
     private final List<DiscountPolicy> discountPolicies;
     private final DiscountDetails discountDetails;
 
     public CompositeDiscountPolicy(
             final VisitDate visitDate, final OrderMenus orderMenus, final Giveaway giveaway) {
-        this.mainDiscountCondition =
-                () -> orderMenus.toBeforeDiscountPriceSumValue() >= MIN_PURCHASE_VALUE_FOR_DISCOUNT;
+        super(() -> orderMenus.toBeforeDiscountPriceSumValue() >= MIN_PURCHASE_VALUE_FOR_DISCOUNT);
         this.discountPolicies = initializeDiscountPolicies(visitDate, orderMenus);
         this.discountDetails = organizeResultsIfAvailable(giveaway);
     }
@@ -45,7 +43,7 @@ public class CompositeDiscountPolicy implements DiscountPolicy {
     }
 
     private boolean isUnavailableToDiscount() {
-        return !mainDiscountCondition.isProperToDiscount();
+        return !discountCondition.isProperToDiscount();
     }
 
     private DiscountDetails organizeResults(final Giveaway giveaway) {
@@ -68,20 +66,17 @@ public class CompositeDiscountPolicy implements DiscountPolicy {
     }
 
     @Override
-    public DiscountDetail calculateDiscountAmount() {
-        if (isUnavailableToDiscount()) {
-            return new DiscountDetail(NO_DISCOUNT_DIFFERENCE, DiscountPolicyType.NO_DISCOUNT);
-        }
-        return discountDetails.calculateDiscountSum();
-    }
-
-    @Override
     public Money discount(final Money money) {
         Money result = money;
         for (final DiscountPolicy discountPolicy : discountPolicies) {
             result = discountPolicy.discount(result);
         }
         return result;
+    }
+
+    @Override
+    protected DiscountDetail calculateDiscount() {
+        return discountDetails.calculateDiscountSum();
     }
 
     public DiscountDetails toDiscountDetails() {
